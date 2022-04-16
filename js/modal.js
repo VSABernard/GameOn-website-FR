@@ -36,10 +36,10 @@ function validate() {
   for (let i = 0; i < numberOfFields; i++) {                                  // loop to show the input's id
     console.log('i = '+ i);
     let inputId = formData[i].getElementsByTagName('input')[0].id;            // retrieve the id of the input
-    console.log("Input id " + inputId);
+    console.log("Input id :" + inputId);
 
     let inputValue = formData[i].getElementsByTagName('input')[0].value;      // retrieve the content value of the input
-    console.log ("inputValue" + inputValue);
+    console.log ("inputValue :" + inputValue);
 
     // if (inputId == "birthdate") {
     //   console.log('Happy birthday!');
@@ -55,23 +55,23 @@ function validate() {
         break;
 
       case 'email':
-        console.log('Check of email');
+        checkEmail(inputValue);
         break;
         
       case 'birthdate':
-        console.log('Check of birthdate');
+        checkBirthdate(inputValue);
         break;
         
       case 'quantity':
-        console.log('Check of quantity');
+        checkQuantity(inputValue);
         break;
         
       case 'location':
-        console.log('Check of location');
+        checkLocation(inputValue);
         break;
       
       case 'checkbox':
-        console.log('Check of checkbox');
+        checkCheckbox(inputValue);
         break;
     }
   }
@@ -84,7 +84,7 @@ function validate() {
 function checkName (name) {
 
   console.log ('Function check of name');
-  console.log ('Name value' + name);
+  console.log ('Name value :' + name);
 
   if (name != "" && name.length >= 2) {
     console.log ('Name is correct');
@@ -94,9 +94,30 @@ function checkName (name) {
     console.log ('Name is incorrect');
     return false;
   }
-
-
 }
 
 
+// Check if email est correct
+// return true if email is correct
+function checkEmail (email) {
 
+  console.log ('Function check of email');
+  console.log ('Email value :' + email);
+
+  var regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;                  // To do : verification email address without "+"
+  console.log ('Result of regex :' + regex.test(email));
+  return regex.test(email);
+}
+
+function validateEmail () {
+  var email = document.getElementById("email").value;
+
+	if (checkEmail(email)) {
+		console.log('Valid email address');
+    return true;
+	}
+	else {
+		console.log('Invalid email address');
+    return false;
+	}
+}
