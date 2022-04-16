@@ -59,7 +59,7 @@ function validate() {
         break;
         
       case 'birthdate':
-        checkBirthdate(inputValue);
+        //checkBirthdate(inputValue);
         break;
         
       case 'quantity':
@@ -71,14 +71,14 @@ function validate() {
         break;
       
       case 'checkbox':
-        checkCheckbox(inputValue);
+       // checkCheckbox(inputValue);
         break;
     }
   }
   return false;
 }
 
-// Check if firts name and last name has 2 characters & it's not empty
+// Control if firts name and last name has 2 characters & it's not empty
 // name : first name and last name to check
 // return true if name is correct
 function checkName (name) {
@@ -97,14 +97,14 @@ function checkName (name) {
 }
 
 
-// Check if email est correct
+// Control if email is correct
 // return true if email is correct
 function checkEmail (email) {
 
   console.log ('Function check of email');
   console.log ('Email value :' + email);
 
-  var regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;                  // To do : verification email address without "+"
+  var regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]{2,}[.][a-zA-Z]{2,3}$/;                  
   console.log ('Result of regex :' + regex.test(email));
   return regex.test(email);
 }
@@ -120,4 +120,27 @@ function validateEmail () {
 		console.log('Invalid email address');
     return false;
 	}
+}
+
+
+// Control if number of contests is correct
+// return true if a value is a number
+function checkQuantity (quantity) {
+
+  console.log ('Function check of contests');
+  console.log ('Contests value :' + quantity);
+
+  var isNaN = function(valeur) {
+    return Number.isNaN(Number(valeur));
+  };
+}
+
+
+// Control if location checked is correct
+// return true if a value is a number
+var radios = document.getElementsByName('location');
+var valeur;
+for(var i = 0; i < boutons.length; i++){
+  if(boutons[i].checked)  {
+  valeur = boutons[i].value; }
 }
