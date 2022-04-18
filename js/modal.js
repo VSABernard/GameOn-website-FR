@@ -35,17 +35,18 @@ function validate() {
 
   for (let i = 0; i < numberOfFields; i++) {                                  // loop to show the input's id
     console.log('i = '+ i);
-    let inputId = formData[i].getElementsByTagName('input')[0].id;            // retrieve the id of the input
-    console.log("Input id :" + inputId);
+    let inputName = formData[i].getElementsByTagName('input')[0].name;            // retrieve the id of the input
+    console.log("Input name :" + inputName);
 
     let inputValue = formData[i].getElementsByTagName('input')[0].value;      // retrieve the content value of the input
     console.log ("inputValue :" + inputValue);
 
+    
     // if (inputId == "birthdate") {
     //   console.log('Happy birthday!');
     // }
 
-    switch (inputId) {
+    switch (inputName) {
       case 'first':
         checkName(inputValue);
         break;
@@ -67,7 +68,17 @@ function validate() {
         break;
         
       case 'location':
-        checkLocation(inputValue);
+        let inputObject = formData[i].getElementsByTagName('input');        // retrieve the content value of the object
+        console.log ("inputObject :" + inputObject);
+
+        checkLocation(inputObject);
+
+        let isLocationChecked = checkLocation(inputObject);
+        if (isLocationChecked) {
+          console.log ('Location is checked'); }
+        else {
+          console.log ('No location is checked!'); }
+
         break;
       
       case 'checkbox':
@@ -109,8 +120,8 @@ function checkEmail (email) {
   return regex.test(email);
 }
 
-function validateEmail () {
-  var email = document.getElementById("email").value;
+function verificationEmail () {
+  let email = document.getElementById("email").value;
 
 	if (checkEmail(email)) {
 		console.log('Valid email address');
@@ -131,16 +142,29 @@ function checkQuantity (quantity) {
   console.log ('Contests value :' + quantity);
 
   var isNaN = function(valeur) {
-    return Number.isNaN(Number(valeur));
+    return Number.isNaN (Number(valeur));
   };
 }
 
 
-// Control if location checked is correct
-// return true if a value is a number
-var radios = document.getElementsByName('location');
-var valeur;
-for(var i = 0; i < boutons.length; i++){
-  if(boutons[i].checked)  {
-  valeur = boutons[i].value; }
+// Control if a location is selected
+// parameter : radioLocation is a radio object
+// return true if the radio button is checked
+// return false if none are checked, or there are no radio buttons
+function checkLocation (radioLocation) {
+
+	if (!radioLocation) {
+		return false; }
+
+	const radioLength = radioLocation.length;
+  console.log ('Radio length:' + radioLength);
+
+	for (let i = 0; i < radioLength; i++) {
+		if (radioLocation[i].checked) {
+      console.log ('City :' + radioLocation[i].value);
+			return true;
+		}
+	}
+	return false;
 }
+
