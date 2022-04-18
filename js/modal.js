@@ -33,6 +33,8 @@ function validate() {
   const numberOfFields = formData.length;            // number of formData elements
   console.log('numberOfFields :' + numberOfFields);
 
+  let numberValidFields = 0;
+
   for (let i = 0; i < numberOfFields; i++) {                                  // loop to show the input's id
     console.log('i = '+ i);
     let inputName = formData[i].getElementsByTagName('input')[0].name;            // retrieve the id of the input
@@ -42,43 +44,50 @@ function validate() {
     console.log ("inputValue :" + inputValue);
 
     
-    // if (inputId == "birthdate") {
-    //   console.log('Happy birthday!');
-    // }
-
     switch (inputName) {
       case 'first':
-        checkName(inputValue);
+        if (checkName(inputValue)) {
+          numberValidFields++;
+        };
         break;
       
       case 'last':
-        checkName(inputValue);
+        if (checkName(inputValue)) {
+          numberValidFields++;
+        };
         break;
 
       case 'email':
-        checkEmail(inputValue);
+        if (checkEmail(inputValue)) {
+          numberValidFields++;
+        }
         break;
         
-      case 'birthdate':
-        //checkBirthdate(inputValue);
-        break;
+      // case 'birthdate':
+      //   //checkBirthdate(inputValue);
+      //   break;
         
       case 'quantity':
-        checkQuantity(inputValue);
+        if (checkQuantity(inputValue)) {
+          numberValidFields++;
+        }
         break;
         
       case 'location':
         let inputObject = formData[i].getElementsByTagName('input');        // retrieve the content value of the object
         console.log ("inputObject :" + inputObject);
 
-        checkLocation(inputObject);
+        if (checkLocation(inputObject)) {
+          numberValidFields++;
+        }
 
         let isLocationChecked = checkLocation(inputObject);
         if (isLocationChecked) {
-          console.log ('Location is checked'); }
+          console.log ('Location is checked'); 
+        }
         else {
-          console.log ('No location is checked!'); }
-
+          console.log ('No location is checked!'); 
+        }
         break;
       
       case 'checkbox':
@@ -86,8 +95,19 @@ function validate() {
         break;
     }
   }
-  return false;
+  
+  console.log ('numberValidFields:' + numberValidFields);
+
+  if (numberValidFields == 5) {
+    console.log ('Form is valid');
+    return true;
+  }
+  else {
+    console.log ('Form is not valid');
+    return false;
+  }
 }
+
 
 // Control if firts name and last name has 2 characters & it's not empty
 // name : first name and last name to check
@@ -115,7 +135,7 @@ function checkEmail (email) {
   console.log ('Function check of email');
   console.log ('Email value :' + email);
 
-  var regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]{2,}[.][a-zA-Z]{2,3}$/;                  
+  let regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]{2,}[.][a-zA-Z]{2,3}$/;                  
   console.log ('Result of regex :' + regex.test(email));
   return regex.test(email);
 }
@@ -124,11 +144,11 @@ function verificationEmail () {
   let email = document.getElementById("email").value;
 
 	if (checkEmail(email)) {
-		console.log('Valid email address');
+		console.log ('Valid email address');
     return true;
 	}
 	else {
-		console.log('Invalid email address');
+		console.log ('Invalid email address');
     return false;
 	}
 }
@@ -141,9 +161,14 @@ function checkQuantity (quantity) {
   console.log ('Function check of contests');
   console.log ('Contests value :' + quantity);
 
-  var isNaN = function(valeur) {
-    return Number.isNaN (Number(valeur));
-  };
+  if (isNaN(quantity) || quantity == "") {
+    console.log ('Quantity is not a number');
+    return false;
+  }
+  else {
+    console.log ('Quantity is a number');
+    return true;
+  } 
 }
 
 
