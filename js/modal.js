@@ -11,8 +11,6 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-let form = document.getElementsByTagName('form')[0];
-let error = document.querySelector('data-error');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -44,21 +42,35 @@ function validate() {
   // circle the field in red if it's not valid
   // display the error message below the field
 
-  if(checkName(first.value) == true) {                                       // firts name' field
-      first.parentElement.setAttribute("data-succes-visible", true);                  
+  if(checkName(first.value) == true) {                                      // firts name' field
+    showSucces(first);                  
    } 
   else {   
-    first.parentElement.setAttribute("data-error-visible", true);                     
+    showError(first);                     
     console.log ('Show error message');
   }
 
   if(checkName(last.value) == true) {                                       // last name's field
-    last.parentElement.setAttribute("data-succes-visible", true);                  
- } 
- else {   
-  last.parentElement.setAttribute("data-error-visible", true);                     
-  console.log ('Show error message');
- }
+    showSucces(last);                  
+  } 
+  else {   
+    showError(last);                     
+    console.log ('Show error message');
+  }
+
+  if(checkEmail(email) == true) {                                            // email's field
+    showSucces(email);                  
+  } 
+  else {   
+    showError(email);                     
+    console.log ('Show error message');
+  }
+
+
+
+
+
+
 
   
 
@@ -83,10 +95,20 @@ function validate() {
 
 
 
+// function to show a succes message and an error message
+function showSucces (field) {
+    field.parentElement.setAttribute("data-succes-visible", true);    
+    field.parentElement.setAttribute("data-error-visible", false);
+}
+
+function showError (field) {
+  field.parentElement.setAttribute("data-succes-visible", false);    
+  field.parentElement.setAttribute("data-error-visible", true);
+}
 
 
 
-// Control if firts name and last name has 2 characters & it's not empty
+// control if firts name and last name has 2 characters & it's not empty
 // name : first name's value or last name's value to check
 // return true if name is correct
 function checkName (name) {
@@ -112,18 +134,23 @@ function checkEmail (email) {
   console.log ('Function check of email');
   console.log ('Email value :' + email);
 
-  let regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]{2,}[.][a-zA-Z]{2,3}$/;                  
-  console.log ('Result of regex :' + regex.test(email));
-  return regex.test(email);
-}
+  let regexEmail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]{2,}[.][a-zA-Z]{2,3}$/;  
 
-function verificationEmail () {
-  let email = document.getElementById("email").value;
-
-	if (checkEmail(email)) {
-		console.log ('Valid email address');
+  if (email.value.match(regexEmail))      {
+    console.log ('Valid email address');
     return true;
-	}
+  }          
+// //   console.log ('Result of regex :' + regex.test(email));
+// //   return regex.test(email);
+// // }
+
+// function verificationEmail () {
+//   let email = document.getElementById("email").value;
+
+// 	if (checkEmail(email)) {
+		
+//     return true;
+// 	}
 	else {
 		console.log ('Invalid email address');
     return false;
