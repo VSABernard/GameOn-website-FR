@@ -51,23 +51,21 @@
           <span class="close"></span>
           <div class="modal-body">
             <form
-              name="reserve"
-              action="index.html"
+              name="reserve"            
               method="get"
-              onsubmit="return validate();">
+              onsubmit="validate();return false">
 
-              <div class="formData">
+              <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Veuillez entrer au moins 2 caracters pour ce champ.">
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
                   type="text"
                   id="first"
-                  name="first"
-                  minlength="2"
-                  /><br>
+                  name="first"                                   
+                  /><br>                  
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error-visible="true" data-error="Veuillez entrer au moins 2 caracters pour ce champ.">
                 <label for="last">Nom</label><br>
                 <input
                   class="text-control"
@@ -78,7 +76,7 @@
                   /><br>
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error-visible="true" data-error="Veuillez entrer une adresse mail valide.">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -88,7 +86,7 @@
                   /><br>
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error-visible="true" data-error="Veuillez entrer votre date de naissance.">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -98,7 +96,7 @@
                   /><br>
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error-visible="true" data-error="Veuillez choisir une reponse.">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input 
                   type="number" 
@@ -110,7 +108,7 @@
               </div>
 
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
-              <div class="formData">
+              <div class="formData" data-error-visible="true" data-error="Veuillez choisir une ville.">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -172,7 +170,7 @@
                   Portland</label>
               </div>
 
-              <div class="formData">
+              <div class="formData" data-error-visible="true" data-error="Vous devez accepter les termes et conditions.">
                 <input
                   class="checkbox-input"
                   type="checkbox"

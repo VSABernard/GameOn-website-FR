@@ -11,6 +11,8 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+let form = document.getElementsByTagName('form')[0];
+let error = document.querySelector('data-error');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -29,96 +31,59 @@ function closeModal() {
 
 // to do list #2
 function validate() {
+  const first = document.getElementById('first');
+  const last = document.getElementById('last');
+  const email = document.getElementById('email');
+  const birthdate = document.getElementById('birthdate');
+  const quantity = document.getElementById('quantity');
+  const location = document.querySelectorAll("input[name='location']:checked");
+  const checkbox1 = document.getElementById('checkbox1');
+
+
+  // circle the field in green if it's valid
+  // circle the field in red if it's not valid
+  // display the error message below the field
+  if(checkName(first.value) == true) {
+      first.parentElement.setAttribute("data-succes-visible", true);                  
+   } 
+  else {   
+    first.parentElement.setAttribute("data-error-visible", true);                     
+    console.log ('Show error message');
+  }
+
+
+
+
+
+  
+  
+
+
   console.log('Fonction validate!');
   const numberOfFields = formData.length;            // number of formData elements
   console.log('numberOfFields :' + numberOfFields);
 
   let numberValidFields = 0;
-
-  for (let i = 0; i < numberOfFields; i++) {                                  // loop to show the input's id
-    console.log('i = '+ i);
-    let inputName = formData[i].getElementsByTagName('input')[0].name;        // retrieve the id of the input
-    console.log("Input name :" + inputName);
-
-    let inputValue = formData[i].getElementsByTagName('input')[0].value;      // retrieve the content value of the input
-    console.log ("inputValue :" + inputValue);
-
-    let inputObject = null;                                                   // retrieve the content value of the object
-    
-    switch (inputName) {
-      case 'first':
-        if (checkName(inputValue)) {
-          numberValidFields++;
-        }
-        break;
-      
-      case 'last':
-        if (checkName(inputValue)) {
-          numberValidFields++;
-        }
-        break;
-
-      case 'email':
-        if (checkEmail(inputValue)) {
-          numberValidFields++;
-        }
-        break;
-        
-      // case 'birthdate':
-      //   //checkBirthdate(inputValue);
-      //   break;
-        
-      case 'quantity':
-        if (checkQuantity(inputValue)) {
-          numberValidFields++;
-        }
-        break;
-        
-      case 'location':
-        inputObject = formData[i].getElementsByTagName('input');        
-        console.log ("inputObject :" + inputObject);
-
-        if (checkLocation(inputObject)) {
-          numberValidFields++;
-          console.log ('Location is checked'); 
-        }
-        
-        else {
-          console.log ('No location is checked!'); 
-        }
-        break;
-      
-      // conditions
-      case 'conditions':
-        inputObject =  formData[i].getElementsByTagName('input')[0];
-        console.log ("inputObject :" + inputObject);
-
-        if (checkCheckbox(inputObject)) {
-          numberValidFields++;
-          console.log ('The general conditions is checked');
-        }
-        else {
-          console.log ('The general conditions is not checked');
-        }
-        break;
-    }
-  }
-  
+   
   console.log ('numberValidFields:' + numberValidFields);
 
-  if (numberValidFields == 6) {
+  if (numberValidFields == 7) {
     console.log ('Form is valid');
-    return true;
+    // return true;
   }
   else {
     console.log ('Form is not valid');
-    return false;
+    // return false;
   }
 }
 
 
+
+
+
+
 // Control if firts name and last name has 2 characters & it's not empty
-// name : first name and last name to check
+// name : first name's value or last name's value to check
 // return true if name is correct
 function checkName (name) {
 
