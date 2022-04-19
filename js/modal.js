@@ -37,24 +37,25 @@ function validate() {
 
   for (let i = 0; i < numberOfFields; i++) {                                  // loop to show the input's id
     console.log('i = '+ i);
-    let inputName = formData[i].getElementsByTagName('input')[0].name;            // retrieve the id of the input
+    let inputName = formData[i].getElementsByTagName('input')[0].name;        // retrieve the id of the input
     console.log("Input name :" + inputName);
 
     let inputValue = formData[i].getElementsByTagName('input')[0].value;      // retrieve the content value of the input
     console.log ("inputValue :" + inputValue);
 
+    let inputObject = null;                                                   // retrieve the content value of the object
     
     switch (inputName) {
       case 'first':
         if (checkName(inputValue)) {
           numberValidFields++;
-        };
+        }
         break;
       
       case 'last':
         if (checkName(inputValue)) {
           numberValidFields++;
-        };
+        }
         break;
 
       case 'email':
@@ -74,31 +75,38 @@ function validate() {
         break;
         
       case 'location':
-        let inputObject = formData[i].getElementsByTagName('input');        // retrieve the content value of the object
+        inputObject = formData[i].getElementsByTagName('input');        
         console.log ("inputObject :" + inputObject);
 
         if (checkLocation(inputObject)) {
           numberValidFields++;
-        }
-
-        let isLocationChecked = checkLocation(inputObject);
-        if (isLocationChecked) {
           console.log ('Location is checked'); 
         }
+        
         else {
           console.log ('No location is checked!'); 
         }
         break;
       
-      case 'checkbox':
-       // checkCheckbox(inputValue);
+      // conditions
+      case 'conditions':
+        inputObject =  formData[i].getElementsByTagName('input')[0];
+        console.log ("inputObject :" + inputObject);
+
+        if (checkCheckbox(inputObject)) {
+          numberValidFields++;
+          console.log ('The general conditions is checked');
+        }
+        else {
+          console.log ('The general conditions is not checked');
+        }
         break;
     }
   }
   
   console.log ('numberValidFields:' + numberValidFields);
 
-  if (numberValidFields == 5) {
+  if (numberValidFields == 6) {
     console.log ('Form is valid');
     return true;
   }
@@ -192,4 +200,20 @@ function checkLocation (radioLocation) {
 	}
 	return false;
 }
+
+
+// Control if the general conditions box is checked
+// parameter : conditions is a checkbox
+// return true if conditions is checked
+// return false if not checked or there is not checked
+function checkCheckbox (conditions) {
+  
+  if (!conditions) {
+    console.log ('This is not a checkbox');
+    return false;
+  }
+
+  return conditions.checked;                                        // replace if/else of the parameter
+}
+
 
