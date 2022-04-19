@@ -234,17 +234,8 @@ input {
   border: 2px solid #e54858;
 }
 
-/* input:invalid {
-  border: 1px solid red;
-}
-
-input:focus:invalid {
-  outline: none;
-} */
-
-
-.formData[data-succes-visible="true"] {
-  border: 1px solid green;
+.formData[data-succes-visible="true"] .text-control {
+  border: 2px solid #94e548;
 } 
 
 /* 

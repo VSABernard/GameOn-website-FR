@@ -43,7 +43,8 @@ function validate() {
   // circle the field in green if it's valid
   // circle the field in red if it's not valid
   // display the error message below the field
-  if(checkName(first.value) == true) {
+
+  if(checkName(first.value) == true) {                                       // firts name' field
       first.parentElement.setAttribute("data-succes-visible", true);                  
    } 
   else {   
@@ -51,11 +52,14 @@ function validate() {
     console.log ('Show error message');
   }
 
+  if(checkName(last.value) == true) {                                       // last name's field
+    last.parentElement.setAttribute("data-succes-visible", true);                  
+ } 
+ else {   
+  last.parentElement.setAttribute("data-error-visible", true);                     
+  console.log ('Show error message');
+ }
 
-
-
-
-  
   
 
 
