@@ -42,35 +42,51 @@ function validate() {
   // circle the field in red if it's not valid
   // display the error message below the field
 
-  if(checkName(first.value) == true) {                                      // firts name' field
-    showSucces(first);                  
+  if  (checkName(first.value) == true) {                                      // firts name' field
+    showSucces  (first);                  
    } 
   else {   
-    showError(first);                     
+    showError (first);                     
     console.log ('Show error message');
   }
 
-  if(checkName(last.value) == true) {                                       // last name's field
-    showSucces(last);                  
+  if  (checkName(last.value) == true) {                                       // last name's field
+    showSucces  (last);                  
   } 
   else {   
-    showError(last);                     
+    showError (last);                     
     console.log ('Show error message');
   }
 
-  if(checkEmail(email) == true) {                                            // email's field
-    showSucces(email);                  
+  if  (checkEmail(email) == true) {                                            // email's field
+    showSucces  (email);                  
   } 
   else {   
-    showError(email);                     
+    showError (email);                     
     console.log ('Show error message');
   }
 
-
-
-
-
-
+  if  (checkBirthdateFormat(birthdate.value) == true) {                                            // birthdate's field
+    showSucces  (birthdate);                  
+  } 
+  else {   
+    showError(birthdate);                     
+    console.log ('Show error message');
+  }
+  if (controlAge(birthdate.value) == true) {
+    showSucces  (birthdate);
+  }
+  else {   
+    showError(birthdate);                     
+    console.log ('Show error message');
+  }
+  if (isPastDate(birthdate.value) == true) {
+    showSucces  (birthdate);
+  }
+  else {   
+    showError(birthdate);                     
+    console.log ('Show error message');
+  }
 
   
 
@@ -95,7 +111,7 @@ function validate() {
 
 
 
-// function to show a succes message and an error message
+// function to show a succes message and an error message for each field
 function showSucces (field) {
     field.parentElement.setAttribute("data-succes-visible", true);    
     field.parentElement.setAttribute("data-error-visible", false);
@@ -127,7 +143,7 @@ function checkName (name) {
 }
 
 
-// Control if email is correct
+// control if email is correct
 // return true if email is correct
 function checkEmail (email) {
 
@@ -140,21 +156,64 @@ function checkEmail (email) {
     console.log ('Valid email address');
     return true;
   }          
-// //   console.log ('Result of regex :' + regex.test(email));
-// //   return regex.test(email);
-// // }
-
-// function verificationEmail () {
-//   let email = document.getElementById("email").value;
-
-// 	if (checkEmail(email)) {
-		
-//     return true;
-// 	}
 	else {
 		console.log ('Invalid email address');
     return false;
 	}
+}
+
+
+// control if birthdate's format is correct and 
+// parameter : birthdate is a date's value
+// return true if birthdate is correct
+function checkBirthdateFormat (birthdate) {
+  let birthdateRegex = /^(19|20)\d{2}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
+  if (birthdateRegex.test(birthdate)) {
+    console.log ('Birthdate format is correct');
+    return true;
+  }
+  else {
+    console.log ('Birthdate format is not correct');
+    return false;
+  }
+}
+
+// control if age is not under 18
+function controlAge (birthdate) {
+    const today = new Date ();
+    const actualYear = today.getFullYear ();
+
+    console.log ('Actual year :' + actualYear);
+    const year = birthdate.substring(0,4);                                                     // l'année (les quatre premiers caractères de la chaîne à partir de 0)
+
+    const actualAge = actualYear - year;
+    if (actualAge > 18) {
+      console.log ('Age is valid');      
+      return true;
+    }
+    else {
+      console.log ('Age is not valid');
+      return false;
+    }
+}
+
+// control if date does not exceed today's date
+function isPastDate (birthdateFormated) {
+  // 2022-12-22
+  // 12/22/2022
+  // changer le fomatage de la date de naissance
+  
+  const dateToday = new Date (); 
+  const dateBirthday =  new Date (birthdateFormated);
+
+  if (dateBirthday < dateToday) {
+    console.log ('Birthdate is valid');
+    return true;
+  }
+  else {
+    console.log ('Birthdate is not valid');
+    return false;
+  }
 }
 
 
