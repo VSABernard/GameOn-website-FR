@@ -20,29 +20,47 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-//to do list #1 close modal form  
+// ===============================
+
+//TO DO LIST #1 : CLOSE MODAL FORM  
 const closeModalBtn = document.querySelector(".bground span.close");
 closeModalBtn.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display ="none";
 }
 
-// to do list #2 and #3
+// ================================
+
+// TO DO LIST # 2 AND # 3 : FORM INPUTS AND VALIDATION / ADD ERROR MESSAGES
+
+// function to show a succes message and an error message for each field
+function showSucces (field) {
+  field.parentElement.setAttribute("data-succes-visible", true);    
+  field.parentElement.setAttribute("data-error-visible", false);
+}
+
+function showError (field) {
+field.parentElement.setAttribute("data-succes-visible", false);    
+field.parentElement.setAttribute("data-error-visible", true);
+}
+
+
 function validate() {
   const first = document.getElementById('first');
   const last = document.getElementById('last');
   const email = document.getElementById('email');
   const birthdate = document.getElementById('birthdate');
   const quantity = document.getElementById('quantity');
-  const location = document.querySelectorAll("input[name='location']:checked");
+  const locations = document.querySelectorAll("input[name='location']:checked");
+  const location1 = document.getElementById('location1');
   const checkbox1 = document.getElementById('checkbox1');
 
-
+  // ADD ERROR MESSAGES
   // circle the field in green if it's valid
   // circle the field in red if it's not valid
   // display the error message below the field
 
-  if  (checkName(first.value) == true) {                                      // firts name' field
+  if (checkName(first.value) == true) {                                      // FIRST NAME's field
     showSucces (first);                  
    } 
   else {   
@@ -50,7 +68,7 @@ function validate() {
     console.log ('Show error message');
   }
 
-  if  (checkName(last.value) == true) {                                       // last name's field
+  if (checkName(last.value) == true) {                                       // LAST NAME's field
     showSucces (last);                  
   } 
   else {   
@@ -58,7 +76,7 @@ function validate() {
     console.log ('Show error message');
   }
 
-  if  (checkEmail(email) == true) {                                            // email's field
+  if (checkEmail(email) == true) {                                            // EMAIL's field
     showSucces (email);                  
   } 
   else {   
@@ -66,9 +84,9 @@ function validate() {
     console.log ('Show error message');
   }
 
-  checkBirthdate (birthdate);                                                 // birthdate's field
+  checkBirthdate (birthdate);                                                 // BIRTHDATE's field
 
-  if  (checkQuantity(quantity.value) == true) {                                     // number of contest's field
+  if (checkQuantity(quantity.value) == true) {                              // NUMBER OF CONTESTS' field
     showSucces (quantity);                  
   } 
   else {   
@@ -76,9 +94,15 @@ function validate() {
     console.log ('Show error message');
   }
 
+  if (checkLocation(locations) == true) {                                  // LOCATION's field
+    showSucces (location1);                  
+  } 
+  else {   
+    showError (location1);                     
+    console.log ('Show error message');
+  }
   
   
-
 
 
 
@@ -108,16 +132,7 @@ function validate() {
 
 
 
-// function to show a succes message and an error message for each field
-function showSucces (field) {
-    field.parentElement.setAttribute("data-succes-visible", true);    
-    field.parentElement.setAttribute("data-error-visible", false);
-}
 
-function showError (field) {
-  field.parentElement.setAttribute("data-succes-visible", false);    
-  field.parentElement.setAttribute("data-error-visible", true);
-}
 
 
 // CONTROL OF EACH FIELD -----------------------------------------------
@@ -162,7 +177,7 @@ function checkEmail (email) {
 
 // ------------------------------------------------------------------------------
 // CONTROL OF BIRTHDATE : call 3 different functions 
-// parameter : birthdate
+// parameter : birthdate object
 // if one function is an error, the others are not called
 
 function checkBirthdate (birthdate) {
