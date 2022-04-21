@@ -43,7 +43,7 @@ function validate() {
   // display the error message below the field
 
   if  (checkName(first.value) == true) {                                      // firts name' field
-    showSucces  (first);                  
+    showSucces (first);                  
    } 
   else {   
     showError (first);                     
@@ -51,7 +51,7 @@ function validate() {
   }
 
   if  (checkName(last.value) == true) {                                       // last name's field
-    showSucces  (last);                  
+    showSucces (last);                  
   } 
   else {   
     showError (last);                     
@@ -59,7 +59,7 @@ function validate() {
   }
 
   if  (checkEmail(email) == true) {                                            // email's field
-    showSucces  (email);                  
+    showSucces (email);                  
   } 
   else {   
     showError (email);                     
@@ -68,7 +68,13 @@ function validate() {
 
   checkBirthdate (birthdate);                                                 // birthdate's field
 
-
+  if  (checkQuantity(quantity.value) == true) {                                     // number of contest's field
+    showSucces (quantity);                  
+  } 
+  else {   
+    showError (quantity);                     
+    console.log ('Show error message');
+  }
 
   
   
@@ -116,7 +122,7 @@ function showError (field) {
 
 // CONTROL OF EACH FIELD -----------------------------------------------
 
-// control if FIRST NAME and LAST NAME has 2 characters & it's not empty
+// CONTROL if FIRST NAME and LAST NAME has 2 characters & it's not empty
 // name : first name's value or last name's value to check
 // return true if name is correct
 function checkName (name) {
@@ -135,7 +141,7 @@ function checkName (name) {
 }
 
 // ------------------------------------------------------------------------------
-// control if EMAIL is correct
+// CONTROL if EMAIL is correct
 // return true if email is correct
 function checkEmail (email) {
 
@@ -155,7 +161,7 @@ function checkEmail (email) {
 }
 
 // ------------------------------------------------------------------------------
-// control of BIRTHDATE : call 3 different functions 
+// CONTROL OF BIRTHDATE : call 3 different functions 
 // parameter : birthdate
 // if one function is an error, the others are not called
 
@@ -248,18 +254,19 @@ function controlAge (birthdate) {
 
 
 // ------------------------------------------------------------------------------
-// Control if number of CONTESTS is correct
+// CONTROL if NUMBER OF CONTESTS is correct
+// parameter : quantity as integer value
 // return true if a value is a number
 function checkQuantity (quantity) {
 
   console.log ('Function check of contests');
-  console.log ('Contests value :' + quantity);
+  console.log ('Contests value :' + (quantity));
 
-  if (isNaN(quantity) || quantity == "") {
+  if (isNaN(quantity) || (quantity.value) == "")  {
     console.log ('Quantity is not a number');
     return false;
   }
-  else {
+  else if (quantity > 0 && quantity < 100) {
     console.log ('Quantity is a number');
     return true;
   } 
@@ -267,7 +274,7 @@ function checkQuantity (quantity) {
 
 
 // -------------------------------------------------------------------------------
-// Control if a LOCATION is selected
+// CONTROL if a LOCATION is selected
 // parameter : radioLocation is a radio object
 // return true if the radio button is checked
 // return false if none are checked, or there are no radio buttons
@@ -290,7 +297,7 @@ function checkLocation (radioLocation) {
 
 
 // ----------------------------------------------------------------------------------
-// Control if the GENERAL CONDITIONS box is checked
+// CONTROL if the GENERAL CONDITIONS box is checked
 // parameter : conditions is a checkbox
 // return true if conditions is checked
 // return false if not checked or there is not checked
