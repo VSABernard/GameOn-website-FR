@@ -27,7 +27,7 @@ function closeModal() {
   modalbg.style.display ="none";
 }
 
-// to do list #2
+// to do list #2 and #3
 function validate() {
   const first = document.getElementById('first');
   const last = document.getElementById('last');
@@ -66,29 +66,18 @@ function validate() {
     console.log ('Show error message');
   }
 
-  if  (checkBirthdateFormat(birthdate.value) == true) {                                            // birthdate's field
-    showSucces  (birthdate);                  
-  } 
-  else {   
-    showError(birthdate);                     
-    console.log ('Show error message');
-  }
-  if (controlAge(birthdate.value) == true) {
-    showSucces  (birthdate);
-  }
-  else {   
-    showError(birthdate);                     
-    console.log ('Show error message');
-  }
-  if (isPastDate(birthdate.value) == true) {
-    showSucces  (birthdate);
-  }
-  else {   
-    showError(birthdate);                     
-    console.log ('Show error message');
-  }
+  checkBirthdate (birthdate);                                                 // birthdate's field
+
+
 
   
+  
+
+
+
+
+
+
 
 
   console.log('Fonction validate!');
@@ -111,6 +100,8 @@ function validate() {
 
 
 
+
+
 // function to show a succes message and an error message for each field
 function showSucces (field) {
     field.parentElement.setAttribute("data-succes-visible", true);    
@@ -123,8 +114,9 @@ function showError (field) {
 }
 
 
+// CONTROL OF EACH FIELD -----------------------------------------------
 
-// control if firts name and last name has 2 characters & it's not empty
+// control if FIRST NAME and LAST NAME has 2 characters & it's not empty
 // name : first name's value or last name's value to check
 // return true if name is correct
 function checkName (name) {
@@ -142,8 +134,8 @@ function checkName (name) {
   }
 }
 
-
-// control if email is correct
+// ------------------------------------------------------------------------------
+// control if EMAIL is correct
 // return true if email is correct
 function checkEmail (email) {
 
@@ -162,29 +154,86 @@ function checkEmail (email) {
 	}
 }
 
+// ------------------------------------------------------------------------------
+// control of BIRTHDATE : call 3 different functions 
+// parameter : birthdate
+// if one function is an error, the others are not called
 
-// control if birthdate's format is correct and 
+function checkBirthdate (birthdate) {
+  if  (checkBirthdateFormat(birthdate.value) == true) {                                            
+    showSucces (birthdate); 
+  } 
+  else {   
+    showError(birthdate);     
+    birthdate.parentElement.setAttribute("data-error", "Veuillez saisir une date de naissance valide");                
+    console.log ('Show error message');
+    return;
+  }  
+  if (isPastDate(birthdate.value) == true) {
+    showSucces (birthdate);
+  }
+  else {   
+    showError(birthdate);     
+    birthdate.parentElement.setAttribute("data-error", "Veuillez saisir une date de naissance inferieur à la date du jour");                 
+    console.log ('Show error message');
+    return;
+  }
+  if (controlAge(birthdate.value) == true) {
+      showSucces (birthdate);
+  }
+    else {   
+      showError(birthdate);        
+      birthdate.parentElement.setAttribute("data-error", "Cette espace est interdite aux personnes mineurs");              
+      console.log ('Show error message');
+      return;
+    }  
+}
+
+// control if birthdate's format is correct
 // parameter : birthdate is a date's value
 // return true if birthdate is correct
 function checkBirthdateFormat (birthdate) {
   let birthdateRegex = /^(19|20)\d{2}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
   if (birthdateRegex.test(birthdate)) {
-    console.log ('Birthdate format is correct');
+    console.log ('Birthdate format is correct');    
     return true;
   }
   else {
     console.log ('Birthdate format is not correct');
+
     return false;
   }
 }
 
+// control if date does not exceed today's date
+// parameter : birthdate is a date's value
+// return true if birthdate is in the past
+function isPastDate (birthdate) {  
+  console.log (birthdate);
+  
+  let birthday = new Date (birthdate);
+  let today = new Date();
+  console.log (today > birthday);
+
+  if (today > birthday) {
+    console.log ('Birthdate is inferior of today');
+    return true;
+  }
+  else {
+    console.log ('Birthdate is can not be superior of today');
+    return false;
+  } 
+}
+
 // control if age is not under 18
+// parameter : birthdate is a date's value
+// return true if age is > 18 years old
 function controlAge (birthdate) {
     const today = new Date ();
     const actualYear = today.getFullYear ();
 
     console.log ('Actual year :' + actualYear);
-    const year = birthdate.substring(0,4);                                                     // l'année (les quatre premiers caractères de la chaîne à partir de 0)
+    const year = birthdate.substring(0,4);                             // l'année (les quatre premiers caractères de la chaîne à partir de 0)
 
     const actualAge = actualYear - year;
     if (actualAge > 18) {
@@ -197,27 +246,9 @@ function controlAge (birthdate) {
     }
 }
 
-// control if date does not exceed today's date
-function isPastDate (birthdateFormated) {
-  // 2022-12-22
-  // 12/22/2022
-  // changer le fomatage de la date de naissance
-  
-  const dateToday = new Date (); 
-  const dateBirthday =  new Date (birthdateFormated);
 
-  if (dateBirthday < dateToday) {
-    console.log ('Birthdate is valid');
-    return true;
-  }
-  else {
-    console.log ('Birthdate is not valid');
-    return false;
-  }
-}
-
-
-// Control if number of contests is correct
+// ------------------------------------------------------------------------------
+// Control if number of CONTESTS is correct
 // return true if a value is a number
 function checkQuantity (quantity) {
 
@@ -235,7 +266,8 @@ function checkQuantity (quantity) {
 }
 
 
-// Control if a location is selected
+// -------------------------------------------------------------------------------
+// Control if a LOCATION is selected
 // parameter : radioLocation is a radio object
 // return true if the radio button is checked
 // return false if none are checked, or there are no radio buttons
@@ -257,7 +289,8 @@ function checkLocation (radioLocation) {
 }
 
 
-// Control if the general conditions box is checked
+// ----------------------------------------------------------------------------------
+// Control if the GENERAL CONDITIONS box is checked
 // parameter : conditions is a checkbox
 // return true if conditions is checked
 // return false if not checked or there is not checked
