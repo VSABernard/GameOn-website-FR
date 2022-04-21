@@ -52,8 +52,9 @@
           <div class="modal-body">
             <form
               name="reserve"            
-              method="get"
-              onsubmit="validate();return false">
+              method="get" 
+              action="index.html"
+              onsubmit="validate(); return false">
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Veuillez entrer au moins 2 caracters pour ce champ">
                 <label for="first">Prénom</label><br>
@@ -62,7 +63,7 @@
                   type="text"
                   id="first"
                   name="first"                                   
-                  required/><br>                  
+                  /><br>                  
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Veuillez entrer au moins 2 caracters pour ce champ">
@@ -72,7 +73,7 @@
                   type="text"
                   id="last"
                   name="last"
-                  required/><br>
+                  /><br>
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Adresse mail invalide">
@@ -82,7 +83,7 @@
                   type="email"
                   id="email"
                   name="email"
-                  required/><br>
+                  /><br>
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="">
@@ -92,7 +93,7 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  required/><br>
+                  /><br>
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Veuillez saisir un nombre entre 0 et 99">
@@ -194,7 +195,7 @@
 
               <input
                 class="btn-submit button"
-                type="submit"                
+                type="submit"                                
                 value="C'est parti"/>
             </form>
           </div>

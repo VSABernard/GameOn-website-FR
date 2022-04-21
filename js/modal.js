@@ -55,71 +55,91 @@ function validate() {
   const location1 = document.getElementById('location1');
   const checkbox1 = document.getElementById('checkbox1');
 
+  let numberValidFields = 0;
+
   // ADD ERROR MESSAGES
   // circle the field in green if it's valid
   // circle the field in red if it's not valid
   // display the error message below the field
 
-  if (checkName(first.value) == true) {                                      // FIRST NAME's field
-    showSucces (first);                  
+  if (checkName (first.value) == true) {                                      // FIRST NAME's field
+    showSucces (first);  
+    numberValidFields++;                
    } 
   else {   
     showError (first);                     
     console.log ('Show error message');
   }
 
-  if (checkName(last.value) == true) {                                       // LAST NAME's field
-    showSucces (last);                  
+  if (checkName (last.value) == true) {                                       // LAST NAME's field
+    showSucces (last);   
+    numberValidFields++;          
   } 
   else {   
     showError (last);                     
     console.log ('Show error message');
   }
 
-  if (checkEmail(email) == true) {                                          // EMAIL's field
-    showSucces (email);                  
+  if (checkEmail (email) == true) {                                          // EMAIL's field
+    showSucces (email);       
+    numberValidFields++;
   } 
   else {   
     showError (email);                     
     console.log ('Show error message');
   }
 
-  checkBirthdate (birthdate);                                               // BIRTHDATE's field
+  if (checkBirthdate (birthdate) == true) {                                 // BIRTHDATE's field
+    numberValidFields++;    
+  }               
+  else {}                                  
 
-  if (checkQuantity(quantity.value) == true) {                             // NUMBER OF CONTESTS' field
-    showSucces (quantity);                  
+  if (checkQuantity (quantity.value) == true) {                             // NUMBER OF CONTESTS' field
+    showSucces (quantity);  
+    numberValidFields++;        
   } 
   else {   
     showError (quantity);                     
     console.log ('Show error message');
   }
 
-  if (checkLocation(locations) == true) {                                  // LOCATION's field
-    showSucces (location1);                  
+  if (checkLocation (locations) == true) {                                  // LOCATION's field
+    showSucces (location1);   
+    numberValidFields++;       
   } 
   else {   
     showError (location1);                     
     console.log ('Show error message');
   }
   
-  if (checkCheckbox(checkbox1) == true) {                                  // GENERAL CONDITIONS' field
-    showSucces (checkbox1);                  
+  if (checkCheckbox (checkbox1) == true) {                                  // GENERAL CONDITIONS' field
+    showSucces (checkbox1);   
+    numberValidFields++;       
    } 
    else {   
      showError (checkbox1);                     
      console.log ('Show error message');
   }
-  // verification of global fields
+
+  // verification of ALL FIELDS IN GLOBAL
+
+   if (first.value && last.value && email && birthdate && quantity.value && locations && checkbox1) {
+     document.reserve.submit ();
+   }
+   else {
+     return false;
+   }
+
   console.log('Fonction validate!');
   const numberOfFields = formData.length;                                 // number of formData elements
   console.log('numberOfFields :' + numberOfFields);
 
-  let numberValidFields = 0;
+  
    
-  console.log ('numberValidFields:' + numberValidFields ++);
+  console.log ('numberValidFields:' + numberValidFields);
 
-  if (numberValidFields == 7) {
-    console.log ('Form is valid');
+  if (numberValidFields == 6) {
+     console.log ('Form is valid');
     return true;
   }
   else {
@@ -200,7 +220,7 @@ function checkBirthdate (birthdate) {
       showError(birthdate);        
       birthdate.parentElement.setAttribute("data-error", "Cette espace est interdite aux personnes mineurs");              
       console.log ('Show error message');
-      return;
+      return true;
     }  
 }
 
