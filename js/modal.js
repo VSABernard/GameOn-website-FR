@@ -11,6 +11,11 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const closeModalBtn = document.querySelector(".bground span.close");
+const successModal = document.querySelector('.modal-thanks');
+const closeThanksBtn = document.querySelector ('.btn-thanks');
+
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -23,7 +28,6 @@ function launchModal() {
 // ===============================
 
 //TO DO LIST #1 : CLOSE MODAL FORM  
-const closeModalBtn = document.querySelector(".bground span.close");
 closeModalBtn.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display ="none";
@@ -132,9 +136,7 @@ function validate() {
 
   console.log('Fonction validate!');
   const numberOfFields = formData.length;                                 // number of formData elements
-  console.log('numberOfFields :' + numberOfFields);
-
-  
+  console.log('numberOfFields :' + numberOfFields);  
    
   console.log ('numberValidFields:' + numberValidFields);
 
