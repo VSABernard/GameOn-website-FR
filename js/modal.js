@@ -8,13 +8,15 @@ function editNav() {
 }
 
 // DOM Elements
+const modal = document.querySelector('#formGlobal');
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const form = document.querySelector('form');
 const formData = document.querySelectorAll(".formData");
 const closeModalBtn = document.querySelector(".bground span.close");
 const successModal = document.querySelector('.modal-thanks');
 const closeThanksBtn = document.querySelector ('.btn-thanks');
-
+const closeFormThanks = document.getElementById('cross-success');
 
 
 // launch modal event
@@ -28,6 +30,7 @@ function launchModal() {
 // ===============================
 
 //TO DO LIST #1 : CLOSE MODAL FORM  
+
 closeModalBtn.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display ="none";
@@ -125,15 +128,7 @@ function validate() {
      console.log ('Show error message');
   }
 
-  // verification of ALL FIELDS IN GLOBAL
-
-   if (first.value && last.value && email && birthdate && quantity.value && locations && checkbox1) {
-     document.reserve.submit ();
-   }
-   else {
-     return false;
-   }
-
+  
   console.log('Fonction validate!');
   const numberOfFields = formData.length;                                 // number of formData elements
   console.log('numberOfFields :' + numberOfFields);  
@@ -149,6 +144,22 @@ function validate() {
     return false;
   }
 }
+
+
+// BLOCK THE FORM after the verification of all FIELDS IN GLOBAL
+form.addEventListener('submit', submitForm);
+
+function submitForm(element) {
+    element.preventDefault();
+    validate();
+
+    if (document.querySelectorAll('[data-error-visible=true]').length == 0) {
+        modal.style.display = 'none';
+        form.reset();
+        openSuccessModal();
+    }
+}
+
 
 
 // CONTROLS OF EACH FIELD -----------------------------------------------
@@ -343,5 +354,17 @@ function checkCheckbox () {
     return false;
   }
 }
+
+
+
+// ===============================
+
+//TO DO LIST #4 : MODAL THANKS
+
+// OPEN the thanks' modal when all fields are valid
+function openSuccessModal() {
+  successModal.style.display = 'flex';
+}
+
 
 
