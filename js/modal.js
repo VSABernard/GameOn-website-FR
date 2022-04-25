@@ -14,9 +14,11 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const form = document.querySelector('form');
 const formData = document.querySelectorAll(".formData");
 const closeModalBtn = document.querySelector(".bground span.close");
-const successModal = document.querySelector('.modal-thanks');
-const closeThanksBtn = document.querySelector ('.btn-thanks');
-const closeFormThanks = document.getElementById('cross-success');
+const successModal = document.querySelector(".modal-thanks");
+const closeThanksBtn = document.querySelector (".btn-thanks");
+const closeFormThanks = document.getElementById('close-cross');
+
+
 
 
 // launch modal event
@@ -31,16 +33,17 @@ function launchModal() {
 
 //TO DO LIST #1 : CLOSE MODAL FORM  
 
-closeModalBtn.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display ="none";
 }
+
+closeModalBtn.addEventListener("click", closeModal);
 
 // ================================
 
 // TO DO LIST # 2 AND # 3 : FORM INPUTS AND VALIDATION / ADD ERROR MESSAGES
 
-// function to show a succes message and an error message for each field
+// function to show a SUCCES MESSAGE and an ERROR MESSAGE for each field
 function showSucces (field) {
   field.parentElement.setAttribute("data-succes-visible", true);    
   field.parentElement.setAttribute("data-error-visible", false);
@@ -156,10 +159,9 @@ function submitForm(element) {
     if (document.querySelectorAll('[data-error-visible=true]').length == 0) {
         modal.style.display = 'none';
         form.reset();
-        openSuccessModal();
+        openThanksModal();
     }
 }
-
 
 
 // CONTROLS OF EACH FIELD -----------------------------------------------
@@ -308,7 +310,7 @@ function checkQuantity (quantity) {
     console.log ('Quantity is not a number');
     return false;
   }
-  else if (quantity > 0 && quantity < 100) {
+  else if (quantity >= 0 && quantity < 100) {
     console.log ('Quantity is a number');
     return true;
   } 
@@ -362,9 +364,19 @@ function checkCheckbox () {
 //TO DO LIST #4 : MODAL THANKS
 
 // OPEN the thanks' modal when all fields are valid
-function openSuccessModal() {
+function openThanksModal() {
   successModal.style.display = 'flex';
 }
 
+// CLOSE the thanks' modal with the CROSS BUTTON
 
+function closeThanksModal() {
+    successModal.style.display = 'none';
+}
+
+closeFormThanks.addEventListener('click', closeThanksModal);
+
+// CLOSE the thanks' modal with the CLOSE's BUTTON
+
+closeThanksBtn.addEventListener('click', closeThanksModal);
 
