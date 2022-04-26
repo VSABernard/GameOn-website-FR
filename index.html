@@ -14,16 +14,16 @@
         <img alt="logo" src="./images/logo.png"/>
       </div>
       <div class="main-navbar">
-        <a href="#" class="active"><span>Accueil</span></a>
-        <a href="#"><span>Détails de l'évènement</span></a>
+        <!-- <a href="#" class="active"><span>Accueil</span></a> -->
+        <a href="#" class="active"><span>Détails de l'évènement</span></a>
         <a href="#"><span>À propos</span></a>
         <a href="#"><span>Contact</span></a>
-        <a href="#"><span>Évènements passés</span></a>
+        <a href="#"><span>Évènements passés</span></a> 
         <a href="javascript:void(0);" class="icon" onclick="editNav()">
-          <i class="fa fa-bars"></i></a>
-      </div>
+          <i class="fa fa-bars"></i></a>     
+      </div>   
     </div>
-  
+   
     <main>
       <div class="hero-section">
         <div class="hero-content">
@@ -53,7 +53,8 @@
             <form
               name="reserve"            
               method="get" 
-              action="index.html">
+              action="index.html"
+              onsubmit="return validate();">
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Veuillez entrer au moins 2 caracters pour ce champ">
                 <label for="first">Prénom</label><br>
@@ -61,8 +62,8 @@
                   class="text-control"
                   type="text"
                   id="first"
-                  name="first"                                   
-                  /><br>                  
+                  name="first"  
+                  required/><br>                  
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Veuillez entrer au moins 2 caracters pour ce champ">
@@ -72,7 +73,7 @@
                   type="text"
                   id="last"
                   name="last"
-                  /><br>
+                  required/><br>
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Adresse mail invalide">
@@ -82,7 +83,7 @@
                   type="email"
                   id="email"
                   name="email"
-                  /><br>
+                  required/><br>
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="">
@@ -92,7 +93,7 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  /><br>
+                  required/><br>
               </div>
 
               <div class="formData" data-error-visible="false" data-succes-visible="false" data-error="Veuillez saisir un nombre entre 0 et 99">
@@ -101,7 +102,8 @@
                   type="number" 
                   class="text-control" 
                   id="quantity" 
-                  name="quantity" />
+                  name="quantity" 
+                  required/>
               </div>
 
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>

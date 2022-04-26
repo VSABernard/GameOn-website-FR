@@ -17,6 +17,8 @@ const closeModalBtn = document.querySelector(".bground span.close");
 const successModal = document.querySelector(".modal-thanks");
 const closeThanksBtn = document.querySelector (".btn-thanks");
 const closeFormThanks = document.getElementById('close-cross');
+const menuBurger = document.querySelector(".menu-burger");
+const closeBurger = document.querySelector(".close-burger");
 
 
 // launch modal event
@@ -50,8 +52,145 @@ function showSucces (field) {
 }
 
 function showError (field) {
-field.parentElement.setAttribute("data-succes-visible", false);    
-field.parentElement.setAttribute("data-error-visible", true);
+  field.parentElement.setAttribute("data-succes-visible", false);    
+  field.parentElement.setAttribute("data-error-visible", true);
+}
+
+
+// the "CHANGE" EVENT on form fields
+
+document.getElementById('first').addEventListener('change', changeOnFirst);
+document.getElementById('last').addEventListener('change', changeOnLast);
+document.getElementById('email').addEventListener('change', changeOnEmail);
+document.getElementById('birthdate').addEventListener('change', changeOnBirthdate);
+document.getElementById('quantity').addEventListener('change', changeOnQuantity);
+document.getElementById('location1').addEventListener('change', changeOnLocations);
+document.getElementById('checkbox1').addEventListener('change', changeOnCheckbox1);
+
+
+function changeOnFirst (event) {
+  let first = event.target;
+  console.log ('Change on first:' + first.value);
+  validateFirstName (first);
+}
+
+function changeOnLast (event){
+  let last = event.target;
+  console.log ('Change on last:' + last.value);
+  validateLastName (last);
+}
+
+function changeOnEmail (event) {
+  let email = event.target;
+  console.log ('Change on email:' + email.value);
+  validateEmail (email);
+}
+
+function changeOnBirthdate (event) {
+  let birthdate = event.target;
+  console.log ('Change on birthdate:' + birthdate.value);
+  validateBirthdate (birthdate);
+}
+
+function changeOnQuantity (event) {
+  let quantity = event.target;
+  console.log ('Change on quantity:' + quantity.value);
+  validateQuantity (quantity);
+}
+
+function changeOnLocations (event) {
+  let locations = event.target;
+  console.log ('Change on location:' + locations.value);
+  validateLocations (locations);
+ }
+
+function changeOnCheckbox1 (event) {
+  let checkbox1 = event.target;
+  console.log ('Change on checkbox1:' + checkbox1.value);
+  validateCheckbox1 (checkbox1);
+}
+
+
+
+function validateFirstName (first) {
+  if (checkName (first.value) == true) {                                      // FIRST NAME's field
+    showSucces (first); 
+    return true;               
+  } 
+  else {   
+    showError (first);                     
+    console.log ('Show error message');
+    return false;
+  }
+}
+
+function validateLastName (last) {
+  if (checkName (last.value) == true) {                                       // LAST NAME's field
+    showSucces (last);  
+    return true;          
+  } 
+  else {   
+    showError (last);                     
+    console.log ('Show error message');
+    return false;
+  }
+}
+
+function validateEmail (email) {
+  if (checkEmail (email) == true) {                                          // EMAIL's field
+    showSucces (email);       
+    return true;
+  } 
+  else {   
+    showError (email);                     
+    console.log ('Show error message');
+    return false;
+  }
+}
+
+function validateBirthdate (birthdate) {
+  if (checkBirthdate (birthdate) == true) {                                 // BIRTHDATE's field
+    return true;    
+  }               
+  else {
+    return false
+  }                                  
+}
+
+function validateQuantity (quantity) {
+  if (checkQuantity (quantity.value) == true) {                             // NUMBER OF CONTESTS' field
+    showSucces (quantity);  
+    return true;        
+  } 
+  else {   
+    showError (quantity);                     
+    console.log ('Show error message');
+    return false;
+  }
+}
+
+function validateLocations (locations) {
+  if (checkLocation (locations) == true) {                                  // LOCATION's field
+    showSucces (location1);   
+    return true;       
+  } 
+  else {   
+    showError (location1);                     
+    console.log ('Show error message');
+    return false;
+  }
+}
+
+function validateCheckbox1 (checkbox1) {
+  if (checkCheckbox (checkbox1) == true) {                                  // GENERAL CONDITIONS' field
+    showSucces (checkbox1);   
+    return true;       
+  } 
+  else {   
+    showError (checkbox1);                     
+    console.log ('Show error message');
+    return false;
+  }
 }
 
 
@@ -72,66 +211,35 @@ function validate() {
   // circle the field in red if it's not valid
   // display the error message below the field
 
-  if (checkName (first.value) == true) {                                      // FIRST NAME's field
-    showSucces (first);  
-    numberValidFields++;                
-   } 
-  else {   
-    showError (first);                     
-    console.log ('Show error message');
-  }
-
-  if (checkName (last.value) == true) {                                       // LAST NAME's field
-    showSucces (last);   
-    numberValidFields++;          
-  } 
-  else {   
-    showError (last);                     
-    console.log ('Show error message');
-  }
-
-  if (checkEmail (email) == true) {                                          // EMAIL's field
-    showSucces (email);       
+  if (validateFirstName (first) == true) {
     numberValidFields++;
-  } 
-  else {   
-    showError (email);                     
-    console.log ('Show error message');
   }
 
-  if (checkBirthdate (birthdate) == true) {                                 // BIRTHDATE's field
-    numberValidFields++;    
-  }               
-  else {}                                  
-
-  if (checkQuantity (quantity.value) == true) {                             // NUMBER OF CONTESTS' field
-    showSucces (quantity);  
-    numberValidFields++;        
-  } 
-  else {   
-    showError (quantity);                     
-    console.log ('Show error message');
+  if (validateLastName (last) == true) {
+    numberValidFields++;
   }
 
-  if (checkLocation (locations) == true) {                                  // LOCATION's field
-    showSucces (location1);   
-    numberValidFields++;       
-  } 
-  else {   
-    showError (location1);                     
-    console.log ('Show error message');
-  }
-  
-  if (checkCheckbox (checkbox1) == true) {                                  // GENERAL CONDITIONS' field
-    showSucces (checkbox1);   
-    numberValidFields++;       
-   } 
-   else {   
-     showError (checkbox1);                     
-     console.log ('Show error message');
+  if (validateEmail (email) == true) {
+    numberValidFields++;
   }
 
-  
+  if (validateBirthdate (birthdate) == true) {
+    numberValidFields++;
+  }
+
+  if (validateQuantity (quantity) == true) {
+    numberValidFields++;
+  }
+
+  if (validateLocations (locations) == true) {
+    numberValidFields++;
+  }
+
+  if (validateCheckbox1 (checkbox1) == true) {
+    numberValidFields++;
+  }
+
+    
   console.log('Fonction validate!');
   const numberOfFields = formData.length;                                 // number of formData elements
   console.log('numberOfFields :' + numberOfFields);  
@@ -170,11 +278,17 @@ function submitForm(element) {
 // name : first name's value or last name's value to check
 // return true if name is correct
 function checkName (name) {
+  if (name == undefined) {
+    return;
+  }
 
   console.log ('Function check of name');
   console.log ('Name value :' + name);
 
-  if (name != "" && name.length >= 2) {
+  let regexName = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+
+
+  if (name.match(regexName) && name != "" && name.length >= 2) {
     console.log ('Name is correct');
     return true;
   }
