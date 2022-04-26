@@ -19,8 +19,6 @@ const closeThanksBtn = document.querySelector (".btn-thanks");
 const closeFormThanks = document.getElementById('close-cross');
 
 
-
-
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -29,7 +27,8 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// ===============================
+// =================================================================================================
+// =================================================================================================
 
 //TO DO LIST #1 : CLOSE MODAL FORM  
 
@@ -39,7 +38,8 @@ function closeModal() {
 
 closeModalBtn.addEventListener("click", closeModal);
 
-// ================================
+// =================================================================================================
+// =================================================================================================
 
 // TO DO LIST # 2 AND # 3 : FORM INPUTS AND VALIDATION / ADD ERROR MESSAGES
 
@@ -357,21 +357,21 @@ function checkCheckbox () {
   }
 }
 
-
-
-// ===============================
+// =================================================================================================
+// =================================================================================================
 
 //TO DO LIST #4 : MODAL THANKS
 
 // OPEN the thanks' modal when all fields are valid
 function openThanksModal() {
-  successModal.style.display = 'flex';
+  successModal.style.display = "flex";
 }
 
 // CLOSE the thanks' modal with the CROSS BUTTON
 
 function closeThanksModal() {
-    successModal.style.display = 'none';
+    successModal.style.display = "none";
+    modalbg.style.display = "none";
 }
 
 closeFormThanks.addEventListener('click', closeThanksModal);
