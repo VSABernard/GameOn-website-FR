@@ -17,8 +17,6 @@ const closeModalBtn = document.querySelector(".bground span.close");
 const successModal = document.querySelector(".modal-thanks");
 const closeThanksBtn = document.querySelector (".btn-thanks");
 const closeFormThanks = document.getElementById('close-cross');
-const menuBurger = document.querySelector(".menu-burger");
-const closeBurger = document.querySelector(".close-burger");
 
 
 // launch modal event
@@ -45,12 +43,12 @@ closeModalBtn.addEventListener("click", closeModal);
 
 // TO DO LIST # 2 AND # 3 : FORM INPUTS AND VALIDATION / ADD ERROR MESSAGES
 
-// function to show a SUCCES MESSAGE and an ERROR MESSAGE for each field
+// a global function to show a SUCCES MESSAGE and an ERROR MESSAGE 
+
 function showSucces (field) {
   field.parentElement.setAttribute("data-succes-visible", true);    
   field.parentElement.setAttribute("data-error-visible", false);
 }
-
 function showError (field) {
   field.parentElement.setAttribute("data-succes-visible", false);    
   field.parentElement.setAttribute("data-error-visible", true);
@@ -73,37 +71,31 @@ function changeOnFirst (event) {
   console.log ('Change on first:' + first.value);
   validateFirstName (first);
 }
-
 function changeOnLast (event){
   let last = event.target;
   console.log ('Change on last:' + last.value);
   validateLastName (last);
 }
-
 function changeOnEmail (event) {
   let email = event.target;
   console.log ('Change on email:' + email.value);
   validateEmail (email);
 }
-
 function changeOnBirthdate (event) {
   let birthdate = event.target;
   console.log ('Change on birthdate:' + birthdate.value);
   validateBirthdate (birthdate);
 }
-
 function changeOnQuantity (event) {
   let quantity = event.target;
   console.log ('Change on quantity:' + quantity.value);
   validateQuantity (quantity);
 }
-
 function changeOnLocations (event) {
   let locations = event.target;
   console.log ('Change on location:' + locations.value);
   validateLocations (locations);
  }
-
 function changeOnCheckbox1 (event) {
   let checkbox1 = event.target;
   console.log ('Change on checkbox1:' + checkbox1.value);
@@ -111,6 +103,7 @@ function changeOnCheckbox1 (event) {
 }
 
 
+// function to show a SUCCES MESSAGE and an ERROR MESSAGE for EACH FIELD
 
 function validateFirstName (first) {
   if (checkName (first.value) == true) {                                      // FIRST NAME's field
@@ -123,7 +116,6 @@ function validateFirstName (first) {
     return false;
   }
 }
-
 function validateLastName (last) {
   if (checkName (last.value) == true) {                                       // LAST NAME's field
     showSucces (last);  
@@ -135,7 +127,6 @@ function validateLastName (last) {
     return false;
   }
 }
-
 function validateEmail (email) {
   if (checkEmail (email) == true) {                                          // EMAIL's field
     showSucces (email);       
@@ -147,7 +138,6 @@ function validateEmail (email) {
     return false;
   }
 }
-
 function validateBirthdate (birthdate) {
   if (checkBirthdate (birthdate) == true) {                                 // BIRTHDATE's field
     return true;    
@@ -156,7 +146,6 @@ function validateBirthdate (birthdate) {
     return false
   }                                  
 }
-
 function validateQuantity (quantity) {
   if (checkQuantity (quantity.value) == true) {                             // NUMBER OF CONTESTS' field
     showSucces (quantity);  
@@ -168,7 +157,6 @@ function validateQuantity (quantity) {
     return false;
   }
 }
-
 function validateLocations (locations) {
   if (checkLocation (locations) == true) {                                  // LOCATION's field
     showSucces (location1);   
@@ -180,7 +168,6 @@ function validateLocations (locations) {
     return false;
   }
 }
-
 function validateCheckbox1 (checkbox1) {
   if (checkCheckbox (checkbox1) == true) {                                  // GENERAL CONDITIONS' field
     showSucces (checkbox1);   
@@ -193,6 +180,23 @@ function validateCheckbox1 (checkbox1) {
   }
 }
 
+// add the BLUR EVENT when a field has lost focus
+// circle the field in red if it's loses focus
+
+const formInput = document.getElementById('form');
+  formInput.addEventListener('focus', onFocus, true);
+  formInput.addEventListener('blur', onBlur, true);
+
+function onFocus(event){
+  console.log('onFocus');
+   event.target.style.border = 'thin solid red';
+}
+function onBlur(event){
+  console.log('onBlur');
+  event.target.style.border = '';
+}
+
+// check if all the fields are FILLED IN CORRECTLY
 
 function validate() {
   const first = document.getElementById('first');
@@ -214,27 +218,21 @@ function validate() {
   if (validateFirstName (first) == true) {
     numberValidFields++;
   }
-
   if (validateLastName (last) == true) {
     numberValidFields++;
   }
-
   if (validateEmail (email) == true) {
     numberValidFields++;
   }
-
   if (validateBirthdate (birthdate) == true) {
     numberValidFields++;
   }
-
   if (validateQuantity (quantity) == true) {
     numberValidFields++;
   }
-
   if (validateLocations (locations) == true) {
     numberValidFields++;
   }
-
   if (validateCheckbox1 (checkbox1) == true) {
     numberValidFields++;
   }
@@ -272,7 +270,8 @@ function submitForm(element) {
 }
 
 
-// CONTROLS OF EACH FIELD -----------------------------------------------
+// CONTROLS OF EACH FIELD ----------------------------------------------
+// ------------------------------------------------------------------------ NAMES
 
 // CONTROL if FIRST NAME and LAST NAME has 2 characters & it's not empty
 // name : first name's value or last name's value to check
@@ -298,7 +297,7 @@ function checkName (name) {
   }
 }
 
-// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------ EMAIL
 // CONTROL if EMAIL is correct
 // return true if email is correct
 function checkEmail (email) {
@@ -318,7 +317,7 @@ function checkEmail (email) {
 	}
 }
 
-// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------ BIRTHDATE
 // CONTROL OF BIRTHDATE : call 3 different functions 
 // parameter : birthdate object
 // if one function is an error, the others are not called
@@ -353,7 +352,7 @@ function checkBirthdate (birthdate) {
     }  
 }
 
-// control if birthdate's format is correct
+// control if BIRTHDATE'S FORMAT is correct
 // parameter : birthdate is a date's value
 // return true if birthdate is correct
 function checkBirthdateFormat (birthdate) {
@@ -369,7 +368,7 @@ function checkBirthdateFormat (birthdate) {
   }
 }
 
-// control if date does not exceed today's date
+// control if DATE DOESN'T EXCEED TODAY'S date
 // parameter : birthdate is a date's value
 // return true if birthdate is in the past
 function isPastDate (birthdate) {  
@@ -389,7 +388,7 @@ function isPastDate (birthdate) {
   } 
 }
 
-// control if age is not under 18
+// control if age is NOT UNDER 18
 // parameter : birthdate is a date's value
 // return true if age is > 18 years old
 function controlAge (birthdate) {
@@ -411,7 +410,7 @@ function controlAge (birthdate) {
 }
 
 
-// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------ QUANTITY
 // CONTROL if NUMBER OF CONTESTS is correct
 // parameter : quantity as integer value
 // return true if a value is a number
@@ -431,7 +430,7 @@ function checkQuantity (quantity) {
 }
 
 
-// -------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------- LOCATION
 // CONTROL if a LOCATION is selected
 // parameter : radioLocation is a radio object
 // return true if the radio button is checked
@@ -454,7 +453,7 @@ function checkLocation (radioLocation) {
 }
 
 
-// ----------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------- GENERAL CONDITIONS
 // CONTROL if the GENERAL CONDITIONS box is checked
 // parameter : checkbox1 is a checkbox
 // return true if checkbox1 is checked
@@ -493,4 +492,10 @@ closeFormThanks.addEventListener('click', closeThanksModal);
 // CLOSE the thanks' modal with the CLOSE's BUTTON
 
 closeThanksBtn.addEventListener('click', closeThanksModal);
+
+
+
+
+
+
 
