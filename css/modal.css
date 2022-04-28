@@ -17,7 +17,7 @@ body {
   flex-direction: column;
   /* background-image: url("background.png"); */
   font-family: var(--font-default);
-  font-size: 18px;
+  font-size: 16px;
   max-width: 1300px;
   margin: 0 auto;
 }
@@ -30,18 +30,21 @@ p {
 /* ============ HEADER =============== */
 
 img {
-  padding-right: 1rem;
+  padding-right: 0.7rem;
+  padding-left: 1rem;
+  width: 95%;
+  height: 95%;
 }
 
-@media screen and (max-width: 350px) {
+/* @media screen and (max-width: 350px) {
   img  {
     width: 90%;
     height: 90%
   }
-}
+} */
 .topnav {
   overflow: hidden;
-  margin: 3.5%;
+  margin: 3.5% 1.5%;
 }
 
 .header-logo {
@@ -52,6 +55,31 @@ img {
 
 .main-navbar {
     float: right;
+    margin-right: 30px; 
+}
+
+@media screen and (max-width: 768px) {
+  .main-navbar {
+    margin-right: 60px; 
+  }
+}
+
+@media screen and (max-width: 435px) {
+  .main-navbar {
+    margin-right: 35px; 
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .main-navbar {
+    margin-right: -100px; 
+  }
+}
+
+@media screen and (max-width: 310px) {
+  .main-navbar.icon.btn-burger {
+    margin-top: 100px; 
+  }
 }
 
 .topnav a {
@@ -80,6 +108,11 @@ img {
 
 .topnav .icon {
   display: none;
+  position: inherit;
+}
+
+.icon.btn-burger {
+  margin-right: -10px;
 }
 
 @media screen and (max-width: 768px) {
@@ -87,8 +120,10 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
+    /* margin-right: -10px; */
     color: red;
     background-color: white;
+    position: absolute;
   }
 }
 
@@ -115,14 +150,16 @@ img {
   }
 } 
 
-@media screen and (max-width: 340px) {
+
+/* @media screen and (max-width: 370px) {
   .topnav a {display: none;}
   .topnav a.icon {
-    margin-top: -45px;
+    margin-top: 0px;
   }
-} 
+}  */
 
 main {
+  min-width: fit-content;
   font-size: 130%;
   font-weight: bolder;
   color: black;
@@ -489,8 +526,9 @@ input[data-error]::after {
 }
 
 .hero-section {
-  min-height: 93vh;
+  /* min-height: 93vh;  */
   width: auto;
+  min-width: min-content;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -500,13 +538,13 @@ input[data-error]::after {
 }
 
 .hero-content {
-  padding: 51px 67px;
+  padding: 50px;
   grid-column: span 4;
   background: #232323;
   color: #fff;
   position: relative;
   text-align: left;
-  /* min-width: 424px; */
+  min-width: 424px;
 }
 
 .hero-content::after {
@@ -515,7 +553,7 @@ input[data-error]::after {
   height: 100%;
   background: #232323;
   position: absolute;
-  right: -80px;
+  right: 0px;
   top: 0;
 }
 
@@ -543,13 +581,14 @@ input[data-error]::after {
   text-transform: capitalize;
   font-size: 1.3rem;
   width: 200px;
-  padding: 15px 25px;
+  padding: 10px 25px;
   margin: 0;
   margin-top: 59px;
 }
 
 .hero-img {
   grid-column: span 8;
+  position: relative;
 }
 
 .hero-img img {

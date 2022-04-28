@@ -17,6 +17,7 @@ const closeModalBtn = document.querySelector(".bground span.close");
 const successModal = document.querySelector(".modal-thanks");
 const closeThanksBtn = document.querySelector (".btn-thanks");
 const closeFormThanks = document.getElementById('close-cross');
+const burgerBtn = document.querySelector('.btn-burger');
 
 
 // launch modal event
@@ -494,8 +495,9 @@ closeFormThanks.addEventListener('click', closeThanksModal);
 closeThanksBtn.addEventListener('click', closeThanksModal);
 
 
+// =================================================================================================
+// =================================================================================================
 
-
-
-
+//Add a responsive HAMBURGER Menu 
+burgerBtn.addEventListener('click', editNav);
 
