@@ -44,6 +44,7 @@ closeModalBtn.addEventListener("click", closeModal);
 // =================================================================================================
 // =================================================================================================
 
+//TO DO LIST #2 : Implement FORM INPUT and add VALIDATION or ERROR messages
 
 
 // a global function to show a SUCCES MESSAGE and an ERROR MESSAGE 
@@ -59,6 +60,7 @@ function showError (field) {
 
 
 // the "CHANGE" EVENT on form fields
+// is fired elements when an alteration to the element's value is committed by the user
 
 document.getElementById('first').addEventListener('change', changeOnFirst);
 document.getElementById('last').addEventListener('change', changeOnLast);
@@ -170,18 +172,32 @@ function validateCheckbox1 (checkbox1) {
 }
 
 
-// add the BLUR EVENT when a field has lost focus
+// add the BLUR EVENT when the user left the field with "TABS" key or a left click outside the field
 // circle the field in red if it's loses focus
 
 const formInput = document.getElementById('form');
-  formInput.addEventListener('focus', onFocus, true);
   formInput.addEventListener('blur', onBlur, true);
 
-function onFocus(event){
-  event.target.style.border = 'thin solid red';
-}
 function onBlur(event){
   event.target.style.border = '';
+  if (event.target.value == "") {
+    event.target.style.border = 'thin solid red';
+  }
+}
+
+
+// BLOCK THE FORM after the verification of all FIELDS IN GLOBAL
+form.addEventListener('submit', submitForm);
+
+function submitForm(event) {
+  event.preventDefault();                                                   // if the event is not explicitly handled, the default action should not be executed as it normally is
+  validate();
+
+  if (document.querySelectorAll('[data-error-visible=true]').length == 0) {
+      modal.style.display = 'none';
+      form.reset();                                                         // empties each field and the form becomes totally blank.
+      openThanksModal();
+  }
 }
 
 
@@ -194,8 +210,9 @@ function validate() {
   const birthdate = document.getElementById('birthdate');
   const quantity = document.getElementById('quantity');
   const locations = document.querySelectorAll("input[name='location']:checked");
-  const location1 = document.getElementById('location1');
   const checkbox1 = document.getElementById('checkbox1');
+
+  const TOTAL_VALID_FIELD = 6;
 
   let numberValidFields = 0;
 
@@ -225,34 +242,12 @@ function validate() {
   if (validateCheckbox1 (checkbox1) == true) {
     numberValidFields++;
   }
-   
-  const numberOfFields = formData.length;                                 // number of formData elements
-  
-  if (numberValidFields == 6) {
-    return true;
-  }
-  else {
-    return false;
-  }
+
+  return numberValidFields == TOTAL_VALID_FIELD;
 }
 
 
-// BLOCK THE FORM after the verification of all FIELDS IN GLOBAL
-form.addEventListener('submit', submitForm);
-
-function submitForm(element) {
-  element.preventDefault();
-  validate();
-
-  if (document.querySelectorAll('[data-error-visible=true]').length == 0) {
-      modal.style.display = 'none';
-      form.reset();
-      openThanksModal();
-  }
-}
-
-
-// CONTROLS OF EACH FIELD ----------------------------------------------
+// CONTROLS OF EACH FIELD -------------------------------------------------
 // ------------------------------------------------------------------------ NAMES
 
 // CONTROL if FIRST NAME and LAST NAME has 2 characters & it's not empty
@@ -386,7 +381,7 @@ function checkQuantity (quantity) {
 
 
 // ------------------------------------------------------------------------------- LOCATION
-// CONTROL if a LOCATION is selected
+// CONTROL if one LOCATION is selected
 // parameter : radioLocation is a radio object
 // return true if the radio button is checked
 // return false if none are checked, or there are no radio buttons
