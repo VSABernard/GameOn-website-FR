@@ -281,7 +281,7 @@ function checkEmail (email) {
   }          
     else {
     return false;
-}
+  }
 }
 
 // ------------------------------------------------------------------------------ BIRTHDATE
@@ -363,13 +363,11 @@ function controlAge (birthdate) {
   }
 }
 
-
 // ------------------------------------------------------------------------------ QUANTITY
 // CONTROL if NUMBER OF CONTESTS is correct
 // parameter : quantity as integer value
 // return true if a value is a number
 function checkQuantity (quantity) {
-
 
   if (isNaN(quantity) || (quantity.value) == "")  {
     return false;
@@ -378,7 +376,6 @@ function checkQuantity (quantity) {
     return true;
   } 
 }
-
 
 // ------------------------------------------------------------------------------- LOCATION
 // CONTROL if one LOCATION is selected
@@ -400,7 +397,6 @@ for (let i = 0; i < radioLength; i++) {
 return false;
 }
 
-
 // ---------------------------------------------------------------------------------- GENERAL CONDITIONS
 // CONTROL if the GENERAL CONDITIONS box is checked
 // parameter : checkbox1 is a checkbox
@@ -413,7 +409,7 @@ function checkCheckbox () {
     return true;
   }
   else {
-    document.getElementById("checkbox1").innerHTML = "Vous devez accepter les termes et conditions";
+    document.getElementById("checkbox1").innerHTML = (showError);
     return false;
   }
 }

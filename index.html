@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>Reservation</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
     <link rel="stylesheet" href="./css/modal.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet"/>
@@ -15,7 +15,7 @@
       </div>
       <div class="main-navbar">
         <!-- <a href="#" class="active"><span>Accueil</span></a> -->
-        <a href="#" class="active"><span>Détails de l'évènement</span></a>
+        <a href="#"><span>Détails de l'évènement</span></a>
         <a href="#"><span>À propos</span></a>
         <a href="#"><span>Contact</span></a>
         <a href="#"><span>Évènements passés</span></a> 
@@ -33,7 +33,7 @@
             de jeux vidéos
           </h1>
           <p class="hero-text">
-            Vous aimez jouer ? Notre prochain <br> évènement gaming est ouvert aux <br> réservations... Places limitées !
+            Vous aimez jouer ? Notre prochain évènement gaming est ouvert aux réservations... Places limitées !
           </p>
           <button class="btn-signup modal-btn">
             Je m'inscris
@@ -104,7 +104,8 @@
                   type="number" 
                   class="text-control" 
                   id="quantity" 
-                  name="quantity" >
+                  name="quantity"
+                  min="0" >
               </div>
 
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
