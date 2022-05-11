@@ -1,4 +1,3 @@
-@charset "UTF-8";
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
@@ -439,6 +438,7 @@ footer {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  top: 100px;
 }
 
 .modal-body {
@@ -616,28 +616,33 @@ input[data-error]::after {
   transform: rotate(-45deg);
 }
 
+@media screen and (max-width: 414px) {
+  .content {
+    top: 79px;
+  }
+}
 /* ------------------------------------------------------------------------- */
 /* TO DO LIST #4 : THANKS' MODAL  */
 
 .modal-thanks {
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
+  min-height: 90%;
   display: none;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
   background-color: #232323;
   color: white;
-  padding: 300px 125px 15px 125px;
+  padding: 350px 125px 15px 125px;
   text-align: center;
   font-weight: 200;
   z-index: 10; 
   position: fixed;
   margin: auto;
-  font-size: 36px;
+  font-size: 32px;
   bottom: 0;
   right: 0;
-  top: 0;
   left: 0;
   border-radius: 5px; 
   box-shadow: 2px 2px 30px #615959;
