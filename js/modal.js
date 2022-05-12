@@ -67,7 +67,7 @@ document.getElementById('last').addEventListener('change', changeOnLast);
 document.getElementById('email').addEventListener('change', changeOnEmail);
 document.getElementById('birthdate').addEventListener('change', changeOnBirthdate);
 document.getElementById('quantity').addEventListener('change', changeOnQuantity);
-document.getElementById('location1').addEventListener('change', changeOnLocations);
+document.querySelectorAll('.checkbox-input').forEach((location) => location.addEventListener('change', changeOnLocations));
 document.getElementById('checkbox1').addEventListener('change', changeOnCheckbox1);
 
 function changeOnFirst (event) {
@@ -90,9 +90,9 @@ function changeOnQuantity (event) {
   let quantity = event.target;
   validateQuantity (quantity);
 }
-function changeOnLocations (event) {
-  let locations = event.target;
-  validateLocations (locations);
+function changeOnLocations(event) {
+  let location = event.target;
+  showSucces (location); 
 }
 function changeOnCheckbox1 (event) {
   let checkbox1 = event.target;
